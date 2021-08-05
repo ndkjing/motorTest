@@ -79,7 +79,12 @@ class SerialData:
     # 接收一行数据
     # 使用readline()时应该注意：打开串口时应该指定超时，否则如果串口没有收到新行，则会一直等待。
     # 如果没有超时，readline会报异常。
-    def readline(self,is_row=False):
+    def readline(self, is_row=False):
+        """
+        读取串口发送的数据
+        :param is_row:
+        :return:
+        """
         data_read = self.uart.readline()
         if is_row:
             return data_read
@@ -95,7 +100,7 @@ class SerialData:
 
     # 发数据
 
-    def send_data(self, data,is_hex=False):
+    def send_data(self, data, is_hex=False):
         if is_hex:
             hex_data = bytes.fromhex(data)
             self.uart.write(hex_data)  # 十六制发送一个数据
@@ -221,11 +226,11 @@ if __name__ == '__main__':
         logger=logger)
     print(serial_obj.readline())
     while True:
-        data = '200300000002C2BA'
-        print(data)
-        serial_obj.send_data(data,is_hex=True)
+        data_send = '200300000002C2BA'
+        print(data_send)
+        serial_obj.send_data(data_send, is_hex=True)
         time.sleep(0.1)
         byte_data = serial_obj.readline(is_row=True)
-        str_data =str(binascii.b2a_hex(byte_data))[2:-1]
+        str_data = str(binascii.b2a_hex(byte_data))[2:-1]
         print(str_data)
-        print('压力',int(str_data[10:14]+str_data[6:10],16)/10.0)
+        print('压力', int(str_data[10:14] + str_data[6:10], 16) / 10.0)
