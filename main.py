@@ -128,6 +128,7 @@ class MainDialog(QMainWindow):
                 self.ui.start_pushButton.setText('开始测试')
                 self.plot_timer.stop()
             self.start_test_time = time.time()
+        print("pwm%dz" % self.data_define_obj.current_pwm)
         self.data_define_obj.com_obj.send_data("pwm%dz" % self.data_define_obj.current_pwm)
 
     def update_com_list(self):

@@ -101,6 +101,7 @@ class SerialData:
     # 发数据
 
     def send_data(self, data, is_hex=False):
+        print('send data',data)
         if is_hex:
             hex_data = bytes.fromhex(data)
             self.uart.write(hex_data)  # 十六制发送一个数据

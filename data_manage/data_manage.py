@@ -17,7 +17,7 @@ class DataManage:
         while True:
             time.sleep(0.1)
             if self.data_define_obj.com_obj is None:
-                print('pass')
+                # print('pass')
                 continue
             com_data_read = self.data_define_obj.com_obj.readline()
             a = 10
@@ -61,7 +61,9 @@ class DataManage:
             byte_data = self.data_define_obj.com_485_obj.readline(is_row=True)
             try:
                 str_data = str(binascii.b2a_hex(byte_data))[2:-1]
+
                 g = int(str_data[10:14] + str_data[6:10], 16) / 100.0
+                print('str_data:', str_data, 'g:', g)
             except Exception as e:
                 print('get_485_data error e', e)
                 continue
