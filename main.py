@@ -9,7 +9,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import numpy as np
 from qt_material import apply_stylesheet
-from mpl_toolkits.mplot3d import Axes3D
+# from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 from matplotlib.lines import Line2D
@@ -41,6 +41,7 @@ class Figure_Canvas(FigureCanvas):
         self.fig = Figure(figsize=(width, height), dpi=100)
         super(Figure_Canvas, self).__init__(self.fig)
         self.ax = self.fig.add_subplot(111)
+        self.ax.grid()
 
     def test(self):
         x = [1, 2, 3, 4, 5, 6, 7]
@@ -243,7 +244,7 @@ class MainDialog(QMainWindow):
 
                 for i in x_g:
                     y_g.append(sum(self.data_define_obj.pwm_g[i]) / len(self.data_define_obj.pwm_g[i]))
-                    print(len(self.data_define_obj.pwm_g[i]))
+                    # print(len(self.data_define_obj.pwm_g[i]))
                 print('g data', list(self.data_define_obj.pwm_a.keys()), y_g)
                 if len(y_g) > len(x_g):
                     y_g = y_g[0:len(x_g)]
